@@ -38,5 +38,23 @@ class TestMarcXmlSplitter(unittest.TestCase):
         for counter in counters:
             self.assertEqual(counter.records, 1)
 
+    def testCountRecordsGroupsOf(self):
+        records = StringIO(initial_value=self.test_records)
+
+        counters = list()
+        def counter_generator():
+            while True:
+                counter = RecordCounter()
+                counters.append(counter)
+                yield counter
+
+        splitter = MarcXmlSplitter(parent=make_parser(),
+                                   handlers=counter_generator(),
+                                   groups_of=2)
+        splitter.parse(records)
+
+        for counter in counters:
+            self.assertTrue(counter.records <= 2)
+
 if __name__ == '__main__':
     unittest.main()
