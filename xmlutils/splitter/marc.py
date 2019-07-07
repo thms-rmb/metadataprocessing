@@ -20,12 +20,13 @@ class MarcXmlSplitter(XMLFilterBase):
         XMLFilterBase.setContentHandler(self, handler)
 
     def startElement(self, name, attrs):
-        if name == "record" and self.processed > 0:
+        if name == "record" and self.processed > 0 \
+           and self.processed % self.groups_of == 0:
+
             self.new_handler()
-            if self.processed % self.groups_of == 0:
-                XMLFilterBase.startDocument(self)
-                XMLFilterBase.startPrefixMapping(self, "", self.uri)
-                XMLFilterBase.startElement(self, "collection", Attributes({}))
+            XMLFilterBase.startDocument(self)
+            XMLFilterBase.startPrefixMapping(self, "", self.uri)
+            XMLFilterBase.startElement(self, "collection", Attributes({}))
         if name != "collection":
             XMLFilterBase.startElement(self, name, attrs)
 

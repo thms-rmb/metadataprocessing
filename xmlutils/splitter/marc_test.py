@@ -53,7 +53,6 @@ class TestMarcXmlSplitter(unittest.TestCase):
                                    handlers=counter_generator(),
                                    groups_of=2)
         splitter.parse(records)
-
         for counter in counters:
             self.assertTrue(counter.records <= 2)
 
