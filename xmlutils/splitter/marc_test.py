@@ -32,7 +32,8 @@ class TestMarcXmlSplitter(unittest.TestCase):
                 counters.append(counter)
                 yield counter
 
-        splitter = MarcXmlSplitter(parent=make_parser(), handlers=counter_generator())
+        splitter = MarcXmlSplitter(parent=make_parser(),
+                                   handlers=counter_generator())
         splitter.parse(records)
 
         for counter in counters:
