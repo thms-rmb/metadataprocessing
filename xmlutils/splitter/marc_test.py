@@ -24,14 +24,14 @@ class TestMarcXmlSplitter(unittest.TestCase):
 
     def testCountRecords(self):
         records = StringIO(initial_value=self.test_records)
-        
+
         counters = list()
         def counter_generator():
             while True:
                 counter = RecordCounter()
                 counters.append(counter)
                 yield counter
-        
+
         splitter = MarcXmlSplitter(parent=make_parser(), handlers=counter_generator())
         splitter.parse(records)
 

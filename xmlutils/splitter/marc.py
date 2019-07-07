@@ -5,7 +5,7 @@ from itertools import count
 
 class MarcXmlSplitter(XMLFilterBase):
     uri = "http://www.loc.gov/MARC21/slim"
-    
+
     def __init__(self, parent = None, handlers = None):
         XMLFilterBase.__init__(self, parent)
         if handlers is None:
@@ -41,4 +41,3 @@ class MarcXmlSplitter(XMLFilterBase):
     def endDocument(self):
         pass
 
-    
